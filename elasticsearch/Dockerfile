@@ -2,8 +2,8 @@
 # version : birdben/ubuntu:elasticsearch
 # desc : 当前版本安装的elasticsearch
 ############################################
-# 设置继承自我们创建的 tomcat7 镜像
-FROM birdben/ubuntu:tomcat7
+# 设置继承自我们创建的 jdk7 镜像
+FROM birdben/ubuntu:jdk7
 
 # 下面是一些创建者的基本信息
 MAINTAINER birdben (191654006@163.com)
