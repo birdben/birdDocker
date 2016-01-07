@@ -1,9 +1,9 @@
 ############################################
-# version : birdben/ubuntu:redis
+# version : birdben/redis:v1
 # desc : 当前版本安装的redis
 ############################################
 # 设置继承自我们创建的 tools 镜像
-FROM birdben/ubuntu:tools
+FROM birdben/tools:v1
 
 # 下面是一些创建者的基本信息
 MAINTAINER birdben (191654006@163.com)
@@ -20,6 +20,9 @@ ENV LC_ALL C
 
 # 复制 redis-3.0.0 文件到镜像中（redis-3.0.0文件夹要和Dockerfile文件在同一路径）
 ADD redis-3.0.0 /software/redis-3.0.0
+
+# 挂载/redis目录
+VOLUME ["/redis"]
 
 # 容器需要开放Redis 6379端口
 EXPOSE 6379

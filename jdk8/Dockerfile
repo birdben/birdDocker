@@ -1,9 +1,9 @@
 ############################################
-# version : birdben/ubuntu:jdk8
+# version : birdben/jdk8:v1
 # desc : 当前版本安装的jdk8
 ############################################
 # 设置继承自我们创建的 tools 镜像
-FROM birdben/ubuntu:tools
+FROM birdben/tools:v1
 
 # 下面是一些创建者的基本信息
 MAINTAINER birdben (191654006@163.com)

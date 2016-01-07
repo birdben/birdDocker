@@ -1,0 +1,1 @@
+docker run -p 9999:22 -p 9200:9200 -p 9300:9300 -t -i 'birdben/elasticsearch:v1'

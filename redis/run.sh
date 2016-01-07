@@ -1,0 +1,1 @@
+docker run -p 9999:22 -p 6379:6379 -t -i -v /docker/redis:/redis "birdben/redis:v1"

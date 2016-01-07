@@ -1,9 +1,9 @@
 ############################################
-# version : birdben/ubuntu:mongodb
+# version : birdben/mongodb:v1
 # desc : 当前版本安装的mongodb
 ############################################
 # 设置继承自我们创建的 tools 镜像
-FROM birdben/ubuntu:tools
+FROM birdben/tools:v1
 
 # 下面是一些创建者的基本信息
 MAINTAINER birdben (191654006@163.com)
@@ -23,8 +23,8 @@ ADD mongodb-3.0.7 /software/mongodb-3.0.7
 
 # VOLUME 选项是将本地的目录挂在到容器中　此处要注意：当你运行-v　＜hostdir>:<Containerdir> 时要确保目录内容相同否则会出现数据丢失
 # 对应关系如下
-# mongo:/docker/mongo
-VOLUME ["/mongo"]
+# mongo:/docker/mongodb
+VOLUME ["/mongodb"]
 
 # 容器需要开放Mongo 30000端口
 EXPOSE 30000

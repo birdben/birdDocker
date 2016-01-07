@@ -1,0 +1,1 @@
+docker run -p 9999:22 -p 8888:80 -t -i birdben/nginx:v1

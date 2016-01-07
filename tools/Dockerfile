@@ -1,5 +1,5 @@
 ############################################
-# version : birdben/ubuntu:tools
+# version : birdben/tools:v1
 # desc : 当前版本安装的ssh，wget，curl，supervisor 
 ############################################
 # 设置继承自ubuntu官方镜像
