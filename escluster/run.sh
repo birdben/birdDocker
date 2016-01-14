@@ -1,0 +1,2 @@
+docker run -p 9999:22 -p 9200:9200 -p 9300:9300 -v /docker/escluster01:/escluster -v /docker/escluster01/config:/software/elasticsearch-1.7.2/config -t -i 'birdben/escluster:v1'
+docker run -p 9998:22 -p 9201:9200 -p 9301:9300 -v /docker/escluster02:/escluster -v /docker/escluster02/config:/software/elasticsearch-1.7.2/config -t -i 'birdben/escluster:v1'
