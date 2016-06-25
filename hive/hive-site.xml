@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?><!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<configuration>
+	<property>
+    <!-- metastore我的mysql不是在该server上，是在另一台Docker镜像中 -->
+    <name>hive.metastore.local</name>
+    <value>false</value>
+  </property>
+	<property>
+    <!-- mysql服务的ip和端口号 -->
+		<name>javax.jdo.option.ConnectionURL</name>
+		<value>jdbc:mysql://172.17.0.2:3306/hive</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionDriveName</name>
+		<value>com.mysql.jdbc.Driver</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionUserName</name>
+		<value>root</value>
+	</property>
+	<property>
+		<name>javax.jdo.option.ConnectionPassword</name>
+		<value>root</value>
+	</property>
+	<property>
+    <!-- hive的仓库目录，需要在HDFS上创建，并修改权限 -->
+		<name>hive.metastore.warehouse.dir</name>
+		<value>/hive/warehouse</value>
+	</property>
+	<property>
+    <!-- 运行hive得主机地址及端口，即本机ip和端口号，启动metastore服务 -->
+	  <name>hive.metastore.uris</name>
+    <value>thrift://Ben:9083</value>
+	</property>
+</configuration>
