@@ -15,21 +15,20 @@ ENV DEBIAN_FRONTEND noninteractive
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # 设置 zookeeper 的环境变量，若读者有其他的环境变量需要设置，也可以在这里添加。
-ENV ZOOKEEPER_HOME /software/zookeeper-3.4.6
+ENV ZOOKEEPER_HOME /software/zookeeper-3.4.8
 ENV PATH ${ZOOKEEPER_HOME}/bin:$PATH
 
-# 复制 zookeeper-3.4.6 文件到镜像中（zookeeper-3.4.6 文件夹要和Dockerfile文件在同一路径）
-ADD zookeeper-3.4.6 /software/zookeeper-3.4.6
+# 复制 zookeeper-3.4.8 文件到镜像中（zookeeper-3.4.8 文件夹要和Dockerfile文件在同一路径）
+ADD zookeeper-3.4.8 /software/zookeeper-3.4.8
 
 # 创建myid文件存储路径
 RUN mkdir -p /var/zookeeper/myid
 
 # 授权ZOOKEEPER_HOME路径给admin用户
-RUN sudo chown -R admin /software/zookeeper-3.4.6
+RUN sudo chown -R admin /software/zookeeper-3.4.8
 
-# 容器需要开放Zookeeper 2888, 3888端口
-EXPOSE 2888
-EXPOSE 3888
+# 容器需要开放Zookeeper 2181端口
+EXPOSE 2181
 
 # 执行supervisord来同时执行多个命令，使用 supervisord 的可执行路径启动服务。
 CMD ["/usr/bin/supervisord"]
