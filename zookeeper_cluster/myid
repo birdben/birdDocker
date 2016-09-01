@@ -1,0 +1,4 @@
+# 根据不同的host，对应zoo序号执行
+echo 1 > /var/zookeeper/myid
+echo 2 > /var/zookeeper/myid
+echo 3 > /var/zookeeper/myid
