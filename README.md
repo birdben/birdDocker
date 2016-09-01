@@ -19,6 +19,7 @@
 - docker pull birdben/hadoop
 - docker pull birdben/hive
 - docker pull birdben/hbase
+- docker pull birdben/zookeeper
 
 #### 具体构建Docker镜像的步骤请参考我的博客
 - http://blog.csdn.net/birdben/article/category/5957617
