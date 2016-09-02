@@ -2,7 +2,8 @@
 
 #### 启动Docker容器，这里分别对每个docker容器指定了不同的hostname
 ```
-$ sudo docker run -h zoo1 --name zoo1 -t -i 'birdben/zookeeper_cluster:v1'
+# 需要暴露2181客户端连接端口号，否则Docker容器外无法连接到zookeeper集群
+$ sudo docker run -p 2181:2181 -h zoo1 --name zoo1 -t -i 'birdben/zookeeper_cluster:v1'
 $ sudo docker run -h zoo2 --name zoo2 -t -i 'birdben/zookeeper_cluster:v1'
 $ sudo docker run -h zoo3 --name zoo3 -t -i 'birdben/zookeeper_cluster:v1'
 ```
