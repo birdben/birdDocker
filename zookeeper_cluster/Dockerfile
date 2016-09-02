@@ -1,6 +1,6 @@
 ############################################
-# version : birdben/zookeeper:v1
-# desc : 当前版本安装的zookeeper
+# version : birdben/zookeeper_cluster:v1
+# desc : 当前版本安装的zookeeper_cluster
 ############################################
 # 设置继承自我们创建的 jdk7 镜像
 FROM birdben/jdk7:v1
