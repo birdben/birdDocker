@@ -1,0 +1,83 @@
+version: '2'
+services:
+   zoo1:
+      # 指定当前构建的Docker容器的镜像
+      image: zookeeper
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: zk1
+      networks:
+         zoo_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.18.0.2
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "zoo1:172.18.0.2"
+         - "zoo2:172.18.0.3"
+         - "zoo3:172.18.0.4"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - ~/Downloads/yunyu/zookeeper_docker/data/zoo1:/opt/data
+         - ~/Downloads/yunyu/zookeeper_docker/logs/zoo1:/opt/log
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "2181:2181"
+         - "2881:2888"
+         - "3881:3888"
+      # 指定当前构建的Docker容器环境变量设置
+      environment:
+         ZOO_MY_ID: 1
+         ZOO_SERVERS: server.1=zoo1:2881:3881 server.2=zoo2:2882:3882 server.3=zoo3:2883:3883
+
+   zoo2:
+      image: zookeeper
+      restart: always
+      container_name: zk2
+      networks:
+         zoo_net:
+            ipv4_address: 172.18.0.3
+      extra_hosts:
+         - "zoo1:172.18.0.2"
+         - "zoo2:172.18.0.3"
+         - "zoo3:172.18.0.4"
+      volumes:
+         - ~/Downloads/yunyu/zookeeper_docker/data/zoo2:/opt/data
+         - ~/Downloads/yunyu/zookeeper_docker/logs/zoo2:/opt/log
+      ports:
+         - "2182:2181"
+         - "2882:2888"
+         - "3882:3888"
+      environment:
+         ZOO_MY_ID: 2
+         ZOO_SERVERS: server.1=zoo1:2881:3881 server.2=zoo2:2882:3882 server.3=zoo3:2883:3883
+
+   zoo3:
+      image: zookeeper
+      restart: always
+      container_name: zk3
+      networks:
+         zoo_net:
+            ipv4_address: 172.18.0.4
+      extra_hosts:
+         - "zoo1:172.18.0.2"
+         - "zoo2:172.18.0.3"
+         - "zoo3:172.18.0.4"
+      volumes:
+         - ~/Downloads/yunyu/zookeeper_docker/data/zoo3:/opt/data
+         - ~/Downloads/yunyu/zookeeper_docker/logs/zoo3:/opt/log
+      ports:
+         - "2183:2181"
+         - "2883:2888"
+         - "3883:3888"
+      environment:
+         ZOO_MY_ID: 3
+         ZOO_SERVERS: server.1=zoo1:2881:3881 server.2=zoo2:2882:3882 server.3=zoo3:2883:3883
+
+networks:
+  zoo_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.18.0.0/16
+        gateway: 172.18.0.1
