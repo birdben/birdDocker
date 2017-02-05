@@ -1,0 +1,7 @@
+2017-02-05 08:19:31,188 CRIT Set uid to user 0
+2017-02-05 08:19:31,189 WARN Included extra file "/etc/supervisor/conf.d/supervisord.conf" during parsing
+2017-02-05 08:19:31,210 INFO RPC interface 'supervisor' initialized
+2017-02-05 08:19:31,211 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2017-02-05 08:19:31,212 INFO supervisord started with pid 1
+2017-02-05 08:19:32,225 INFO spawned: 'shadowsocks' with pid 9
+2017-02-05 08:19:33,314 INFO success: shadowsocks entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)

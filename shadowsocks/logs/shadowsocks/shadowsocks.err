@@ -1,0 +1,13 @@
+INFO: loading config from /etc/shadowsocks.json
+2017-02-05 08:19:32 INFO     loading libcrypto from libcrypto.so.1.0.0
+2017-02-05 08:19:32 INFO     starting server at 0.0.0.0:443
+2017-02-05 08:21:46 INFO     connecting www.google.com:443 from 172.17.0.1:54762
+2017-02-05 08:21:46 INFO     connecting www.facebook.com:443 from 172.17.0.1:54766
+2017-02-05 08:23:01 ERROR    [Errno 111] Connection refused
+2017-02-05 08:23:01 INFO     connecting www.google.com:443 from 172.17.0.1:54770
+2017-02-05 08:24:16 ERROR    [Errno 111] Connection refused
+2017-02-05 08:24:44 INFO     connecting www.google.com:443 from 172.17.0.1:54774
+2017-02-05 08:24:53 INFO     connecting www.facebook.com:443 from 172.17.0.1:54778
+2017-02-05 08:25:42 INFO     connecting twitter.com:443 from 172.17.0.1:54782
+2017-02-05 08:26:00 ERROR    [Errno 111] Connection refused
+2017-02-05 08:26:57 ERROR    [Errno 111] Connection refused

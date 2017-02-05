@@ -1,0 +1,1 @@
+docker build -t "birdben/shadowsocks:v1" .
