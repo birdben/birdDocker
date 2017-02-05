@@ -10,18 +10,13 @@ MAINTAINER birdben (191654006@163.com)
 
 # 设置环境变量，所有操作都是非交互式的
 ENV DEBIAN_FRONTEND noninteractive
-ENV SSS_USER=shadowsocks
-ENV SSS_SUPERVISOR_LOG_DIR=/var/log/supervisor
-ENV SSS_SHADOWSOCKS_LOG_DIR=/var/log/shadowsocks
+ENV SUPERVISOR_LOG_DIR=/var/log/supervisor
+ENV SHADOWSOCKS_LOG_DIR=/var/log/shadowsocks
 
 # Add a user and make dirs
 RUN set -x \
-    && useradd $SSS_USER \
-    && mkdir -p $SSS_SUPERVISOR_LOG_DIR \
-    && mkdir -p $SSS_SHADOWSOCKS_LOG_DIR \
-    && chown $SSS_USER:$SSS_USER $SSS_SUPERVISOR_LOG_DIR \
-    && chown $SSS_USER:$SSS_USER $SSS_SHADOWSOCKS_LOG_DIR \
-    && chmod 777 /var/run
+    && mkdir -p $SUPERVISOR_LOG_DIR \
+    && mkdir -p $SHADOWSOCKS_LOG_DIR
 
 # 替换 sources.list 的配置文件，并复制配置文件到对应目录下面。
 # 这里使用的AWS国内的源，也可以替换成其他的源（例如：阿里云的源）
