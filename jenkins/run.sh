@@ -1,0 +1,1 @@
+docker run -d -p 8080:8080 -v ~/Download/jenkins_ben:/var/jenkins_home -t birdben/jenkins:v1
