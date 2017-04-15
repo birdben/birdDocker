@@ -1,1 +1,1 @@
-docker build -t "birdben/shadowsocks:v1" .
+docker build -t "birdben/shadowsocks:v2" .
