@@ -1,24 +1,25 @@
 ############################################
-# version : birdben/jdk8:v1
+# version : birdben/jdk8:v2
 # desc : 当前版本安装的jdk8
 ############################################
 # 设置继承自我们创建的 tools 镜像
-FROM birdben/tools:v1
+FROM birdben/tools:v2
 
 # 下面是一些创建者的基本信息
 MAINTAINER birdben (191654006@163.com)
 
-# 设置环境变量，所有操作都是非交互式的
-ENV DEBIAN_FRONTEND noninteractive
-
-# 添加 supervisord 的配置文件，并复制配置文件到对应目录下面。（supervisord.conf文件和Dockerfile文件在同一路径）
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
 
 # 设置 jdk 的环境变量，若读者有其他的环境变量需要设置，也可以在这里添加。
-ENV JAVA_HOME /software/jdk8
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
 
-# 复制 jdk1.8.0_65 文件到镜像中（jdk1.8.0_65 文件夹要和Dockerfile文件在同一路径）
-ADD jdk1.8.0_65 /software/jdk8
+# see https://bugs.debian.org/775775
+# and https://github.com/docker-library/java/issues/19#issuecomment-70546872
+ENV CA_CERTIFICATES_JAVA_VERSION 20160321
 
-# 执行supervisord来同时执行多个命令，使用 supervisord 的可执行路径启动服务。
-CMD ["/software/bin/supervisord"]
+RUN set -x \
+	&& apt-get update \
+	&& apt-get install -y -t jessie-backports \
+		openjdk-8-jre-headless \
+        ca-certificates-java \
+	&& rm -rf /var/lib/apt/lists/*
