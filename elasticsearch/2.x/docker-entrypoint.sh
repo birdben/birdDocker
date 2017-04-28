@@ -11,6 +11,9 @@ fi
 # allow the container to be started with `--user`
 # TODO
 if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
 	set -- gosu elasticsearch "$@"
 fi
 
