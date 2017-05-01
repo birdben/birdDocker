@@ -1,1 +1,0 @@
-docker run -p 9999:22 -p 5601:5601 -t -i "birdben/kibana:v1"
