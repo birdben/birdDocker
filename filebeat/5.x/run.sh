@@ -1,0 +1,4 @@
+CURRENT_UID=`whoami`
+docker run -itd -v /Users/yunyu/workspace_git/birdDocker/filebeat/5.x/logfile:/usr/share/filebeat/logfile -v /Users/yunyu/workspace_git/birdDocker/filebeat/5.x/data:/usr/share/filebeat/data -v /Users/yunyu/workspace_git/birdDocker/filebeat/5.x/config:/usr/share/filebeat/config -v /Users/yunyu/workspace_git/birdDocker/filebeat/5.x/logs:/usr/share/filebeat/logs --link elasticsearch_5.x_${CURRENT_UID} --name filebeat_5.x_${CURRENT_UID} birdben/filebeat_5.x:v2 filebeat -c /usr/share/filebeat/config/filebeat.yml
+# --link : 设置启动Filebeat客户机容器并链接至ES服务器容器，并且修改filebeat.yml配置文件中连接ES的host主机名称
+# -e : 将日志输出到控制台，并且禁用syslog/文件输出。如果带有-e参数，docker logs可以查看到filebeat的日志，但是日志不会输出到指定的日志文件中；如果不带-e参数，docker logs就看不到任何filebeat的日志输出，会输出到指定的日志文件中
