@@ -12,9 +12,6 @@ MAINTAINER birdben (191654006@163.com)
 RUN groupadd -r ssserver \ 
     && useradd -r -g ssserver ssserver
 
-# 添加环境变量
-ENV SHADOWSOCKS_LOG_DIR=/var/log/shadowsocks
-
 # 安装Shadowsocks
 RUN apt-get update \
     && apt-get -y install python-pip \
@@ -24,8 +21,10 @@ RUN apt-get update \
 
 # Make dirs and chown
 RUN set -x \
-    && mkdir -p $SHADOWSOCKS_LOG_DIR \
-    && chown -R ssserver:ssserver $SHADOWSOCKS_LOG_DIR
+    && mkdir -p /etc/shadowsocks \
+    && mkdir -p /var/log/shadowsocks \
+    && chown -R ssserver:ssserver /etc/shadowsocks \
+    && chown -R ssserver:ssserver /var/log/shadowsocks
 
 # /Users/yunyu/workspace_git/birdDocker/shadowsocks/logs/shadowsocks:/var/log/shadowsocks
 # 这里挂载的路径是birdTracker项目的目录

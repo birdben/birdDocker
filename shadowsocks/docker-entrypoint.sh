@@ -8,7 +8,7 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 # allow the container to be started with `--user`
-# TODO
+# 不需要使用gosu切换用户运行ssserver，ssserver有--user参数指定执行用户
 #if [ "$1" = 'ssserver' -a "$(id -u)" = '0' ]; then
 #	# chown -R ssserver .
 #	# exec gosu ssserver "$0" "$@"
