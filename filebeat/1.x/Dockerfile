@@ -32,7 +32,10 @@ RUN set -x \
 	&& mkdir -p /opt/filebeat/data \
 	&& mkdir -p /opt/filebeat/logs \
 	&& mkdir -p /opt/filebeat/logfile \
-	&& chown -R filebeat:filebeat /opt/filebeat
+	&& chown -R filebeat:filebeat /opt/filebeat/config \
+	&& chown -R filebeat:filebeat /opt/filebeat/data \
+	&& chown -R filebeat:filebeat /opt/filebeat/logs \
+	&& chown -R filebeat:filebeat /opt/filebeat/logfile
 
 ENV FB_HOME /opt/filebeat
 
@@ -40,9 +43,9 @@ ENV FB_HOME /opt/filebeat
 COPY docker-entrypoint.sh /usr/local/bin/
 # RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-VOLUME /opt/filebeat/logs
-VOLUME /opt/filebeat/data
 VOLUME /opt/filebeat/config
+VOLUME /opt/filebeat/data
+VOLUME /opt/filebeat/logs
 VOLUME /opt/filebeat/logfile
 
 ENTRYPOINT ["docker-entrypoint.sh"]
