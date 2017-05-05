@@ -11,6 +11,8 @@ fi
 # allow the container to be started with `--user`
 # TODO
 if [ "$1" = 'kibana' -a "$(id -u)" = '0' ]; then
+	chown -R kibana:kibana /usr/share/kibana/logs
+	chown -R kibana:kibana /usr/share/kibana/config
 	set -- gosu kibana "$@"
 fi
 

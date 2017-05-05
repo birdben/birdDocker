@@ -28,7 +28,10 @@ RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends "kibana=$KB_VERSION" \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& chown -R kibana:kibana /usr/share/kibana
+	&& mkdir -p /usr/share/kibana/logs \
+	&& mkdir -p /usr/share/kibana/config \
+	&& chown -R kibana:kibana /usr/share/kibana/logs \
+	&& chown -R kibana:kibana /usr/share/kibana/config
 
 ENV KB_HOME /usr/share/kibana
 ENV PATH /usr/share/kibana/bin:$PATH
