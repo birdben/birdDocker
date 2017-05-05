@@ -28,7 +28,12 @@ RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends "logstash=$LS_VERSION" \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& chown -R logstash:logstash /opt/logstash
+	&& mkdir -p /opt/logstash/logs \
+	&& mkdir -p /opt/logstash/logfile \
+	&& mkdir -p /opt/logstash/config \
+	&& chown -R logstash:logstash /opt/logstash/logs \
+	&& chown -R logstash:logstash /opt/logstash/logfile \
+	&& chown -R logstash:logstash /opt/logstash/config
 
 ENV LS_HOME /opt/logstash
 ENV PATH /opt/logstash/bin:$PATH
@@ -38,6 +43,7 @@ COPY docker-entrypoint.sh /usr/local/bin/
 # RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 VOLUME /opt/logstash/logs
+VOLUME /opt/logstash/logfile
 VOLUME /opt/logstash/config
 
 ENTRYPOINT ["docker-entrypoint.sh"]

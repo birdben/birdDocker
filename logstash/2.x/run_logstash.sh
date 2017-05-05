@@ -1,0 +1,1 @@
+docker run -itd --user logstash -v /Users/yunyu/workspace_git/birdDocker/logstash/2.x/logfile:/opt/logstash/logfile -v /Users/yunyu/workspace_git/birdDocker/logstash/2.x/config:/opt/logstash/config -v /Users/yunyu/workspace_git/birdDocker/logstash/2.x/logs:/opt/logstash/logs --name logstash_2.x_logstash birdben/logstash_2.x:v2 logstash -f /opt/logstash/config/logstash.conf
