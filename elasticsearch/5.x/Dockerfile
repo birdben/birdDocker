@@ -29,7 +29,12 @@ RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends "elasticsearch=$ES_VERSION" \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
+	&& mkdir -p /usr/share/elasticsearch/data \
+	&& mkdir -p /usr/share/elasticsearch/logs \
+	&& mkdir -p /usr/share/elasticsearch/config \
+	&& chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data \
+	&& chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs \
+	&& chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
 
 ENV ES_HOME /usr/share/elasticsearch
 ENV PATH /usr/share/elasticsearch/bin:$PATH
