@@ -1,31 +1,48 @@
 ############################################
-# version : birdben/redis:v1
+# version : birdben/redis:v2
 # desc : 当前版本安装的redis
 ############################################
 # 设置继承自我们创建的 tools 镜像
-FROM birdben/tools:v1
+FROM birdben/tools:v2
 
 # 下面是一些创建者的基本信息
 MAINTAINER birdben (191654006@163.com)
 
-# 设置环境变量，所有操作都是非交互式的
-ENV DEBIAN_FRONTEND noninteractive
+# 添加User和Group
+RUN groupadd -r redis \
+    && useradd -r -g redis redis
 
-# 添加 supervisord 的配置文件，并复制配置文件到对应目录下面。（supervisord.conf文件和Dockerfile文件在同一路径）
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# 导入Redis的PGP key
+RUN set -x \
+	&& wget -qO – https://www.dotdeb.org/dotdeb.gpg | apt-key add –
 
-# 设置 redis 的环境变量，若读者有其他的环境变量需要设置，也可以在这里添加。
-ENV REDIS_HOME /software/redis-3.0.0
-ENV LC_ALL C
+RUN set -x \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends apt-transport-https \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& echo 'deb http://packages.dotdeb.org jessie all' > /etc/apt/sources.list.d/redis.list
 
-# 复制 redis-3.0.0 文件到镜像中（redis-3.0.0文件夹要和Dockerfile文件在同一路径）
-ADD redis-3.0.0 /software/redis-3.0.0
+RUN set -x \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends "redis-server" \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& mkdir -p /redis/data \
+	&& mkdir -p /redis/config \
+	&& mkdir -p /redis/logs \
+	&& chown -R redis:redis /redis/data \
+	&& chown -R redis:redis /redis/config \
+	&& chown -R redis:redis /redis/logs
 
-# 挂载/redis目录
-VOLUME ["/redis"]
+# 复制docker-entrypoint.sh脚本到/usr/local/bin目录下
+COPY docker-entrypoint.sh /usr/local/bin/
+# RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+VOLUME /redis/data
+VOLUME /redis/config
+VOLUME /redis/logs
 
 # 容器需要开放Redis 6379端口
 EXPOSE 6379
 
-# 执行supervisord来同时执行多个命令，使用 supervisord 的可执行路径启动服务。
-CMD ["/usr/bin/supervisord"]
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["redis-server"]
