@@ -14,8 +14,20 @@ ENV DEBIAN_FRONTEND noninteractive
 # 清空ubuntu更新包
 RUN sudo rm -rf /var/lib/apt/lists/*
 
+# 使用阿里源安装包
+#RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty main multiverse restricted universe"                 > /etc/apt/sources.list
+#RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main multiverse restricted universe"       >> /etc/apt/sources.lsst
+#RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main multiverse restricted universe"        >> /etc/apt/sources.list
+#RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-security main multiverse restricted universe"        >> /etc/apt/sources.list
+#RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main multiverse restricted universe"         >> /etc/apt/sources.list
+#RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty main multiverse restricted universe"             >> /etc/apt/sources.list
+#RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main multiverse restricted universe"   >> /etc/apt/sources.list
+#RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main multiverse restricted universe"    >> /etc/apt/sources.lsst
+#RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main multiverse restricted universe"    >> /etc/apt/sources.list
+#RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main multiverse restricted universe"     >> /etc/apt/sources.list
+
 # 一次性安装vim，wget，curl，ssh server等必备软件
-# RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe"> /etc/apt/sources.list
+#RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe"> /etc/apt/sources.list
 RUN sudo apt-get update
 RUN sudo apt-get install -y vim wget curl openssh-server sudo
 RUN sudo mkdir -p /var/run/sshd
