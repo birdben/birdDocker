@@ -1,0 +1,148 @@
+version: '2'
+services:
+   zoo1:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/zookeeper:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: zookeeper1
+      networks:
+         kafka_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.22.0.2
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "zoo1:172.22.0.2"
+         - "zoo2:172.22.0.3"
+         - "zoo3:172.22.0.4"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo1/conf:/usr/local/zookeeper/conf
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo1/data:/usr/local/zookeeper/data
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo1/datalogs:/usr/local/zookeeper/datalogs
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo1/logs:/usr/local/zookeeper/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "2181:2181"
+         - "2881:2888"
+         - "3881:3888"
+
+   zoo2:
+      image: birdben/zookeeper:v2
+      restart: always
+      container_name: zookeeper2
+      networks:
+         kafka_net:
+            ipv4_address: 172.22.0.3
+      extra_hosts:
+         - "zoo1:172.22.0.2"
+         - "zoo2:172.22.0.3"
+         - "zoo3:172.22.0.4"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo2/conf:/usr/local/zookeeper/conf
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo2/data:/usr/local/zookeeper/data
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo2/datalogs:/usr/local/zookeeper/datalogs
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo2/logs:/usr/local/zookeeper/logs
+      ports:
+         - "2182:2181"
+         - "2882:2888"
+         - "3882:3888"
+
+   zoo3:
+      image: birdben/zookeeper:v2
+      restart: always
+      container_name: zookeeper3
+      networks:
+         kafka_net:
+            ipv4_address: 172.22.0.4
+      extra_hosts:
+         - "zoo1:172.22.0.2"
+         - "zoo2:172.22.0.3"
+         - "zoo3:172.22.0.4"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo3/conf:/usr/local/zookeeper/conf
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo3/data:/usr/local/zookeeper/data
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo3/datalogs:/usr/local/zookeeper/datalogs
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/zoo3/logs:/usr/local/zookeeper/logs
+      ports:
+         - "2183:2181"
+         - "2883:2888"
+         - "3883:3888"
+
+   kafka1:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/kafka:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: kafka1
+      networks:
+         kafka_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.22.0.5
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "zoo1:172.22.0.2"
+         - "zoo2:172.22.0.3"
+         - "zoo3:172.22.0.4"
+         - "kafka1:172.22.0.5"
+         - "kafka2:172.22.0.6"
+         - "kafka3:172.22.0.7"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/kafka1/config:/usr/local/kafka/config
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/kafka1/data:/usr/local/kafka/data
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/kafka1/logs:/usr/local/kafka/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "9092:9092"
+
+   kafka2:
+      image: birdben/kafka:v2
+      restart: always
+      container_name: kafka2
+      networks:
+         kafka_net:
+            ipv4_address: 172.22.0.6
+      extra_hosts:
+         - "zoo1:172.22.0.2"
+         - "zoo2:172.22.0.3"
+         - "zoo3:172.22.0.4"
+         - "kafka1:172.22.0.5"
+         - "kafka2:172.22.0.6"
+         - "kafka3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/kafka2/config:/usr/local/kafka/config
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/kafka2/data:/usr/local/kafka/data
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/kafka2/logs:/usr/local/kafka/logs
+      ports:
+         - "9093:9092"
+
+   kafka3:
+      image: birdben/kafka:v2
+      restart: always
+      container_name: kafka3
+      networks:
+         kafka_net:
+            ipv4_address: 172.22.0.7
+      extra_hosts:
+         - "zoo1:172.22.0.2"
+         - "zoo2:172.22.0.3"
+         - "zoo3:172.22.0.4"
+         - "kafka1:172.22.0.5"
+         - "kafka2:172.22.0.6"
+         - "kafka3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/kafka3/config:/usr/local/kafka/config
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/kafka3/data:/usr/local/kafka/data
+         - /Users/yunyu/workspace_git/birdDocker/kafka_cluster/volumes/kafka3/logs:/usr/local/kafka/logs
+      ports:
+         - "9094:9092"
+
+networks:
+  kafka_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.22.0.0/16
+        gateway: 172.22.0.1
