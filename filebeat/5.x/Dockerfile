@@ -50,4 +50,4 @@ VOLUME /usr/share/filebeat/logs
 VOLUME /usr/share/filebeat/logfile
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["filebeat", "-e"]
+CMD ["filebeat", "-c", "/usr/share/filebeat/config/filebeat.yml"]

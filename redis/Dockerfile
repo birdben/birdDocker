@@ -45,4 +45,4 @@ VOLUME /redis/logs
 EXPOSE 6379
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["redis-server"]
+CMD ["redis-server", "/redis/config/redis.conf", "--protected-mode", "no"]

@@ -55,4 +55,4 @@ VOLUME /usr/share/rsyslog/logfile
 EXPOSE 514/tcp 514/udp
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["rsyslogd", "-n"]
+CMD ["rsyslogd", "-dn", "-f", "/etc/rsyslog.d/rsyslog2kafka.conf", "-i", "/usr/share/rsyslog/pidfile/rsyslog2kafka.pid"]
