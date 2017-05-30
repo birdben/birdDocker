@@ -1,0 +1,1 @@
+docker run -itd -p 9092:9092 --user kafka -v /Users/yunyu/workspace_git/birdDocker/kafka/data:/usr/local/kafka/data -v /Users/yunyu/workspace_git/birdDocker/kafka/config:/usr/local/kafka/config -v /Users/yunyu/workspace_git/birdDocker/kafka/logs:/usr/local/kafka/logs --link zookeeper_zookeeper:zookeeper --name kafka_kafka birdben/kafka:v2

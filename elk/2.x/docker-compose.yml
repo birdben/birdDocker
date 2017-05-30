@@ -1,0 +1,124 @@
+version: '2'
+services:
+
+   filebeat:
+      image: birdben/filebeat_1.x:v2
+      restart: always
+      container_name: filebeat1x
+      command: filebeat -c /opt/filebeat/config/filebeat_file2redis.yml
+      networks:
+         elk_net:
+            ipv4_address: 172.20.0.2
+      extra_hosts:
+         - "filebeat:172.20.0.2"
+         - "redis:172.20.0.3"
+         - "logstash:172.20.0.4"
+         - "elasticsearch:172.20.0.5"
+         - "kibana:172.20.0.6"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/filebeat/data:/opt/filebeat/data
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/filebeat/config:/opt/filebeat/config
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/filebeat/logfile:/opt/filebeat/logfile
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/filebeat/logs:/opt/filebeat/logs
+
+   redis:
+      image: birdben/redis:v2
+      restart: always
+      container_name: redis
+      command: redis-server /redis/config/redis.conf --protected-mode no
+      networks:
+         elk_net:
+            ipv4_address: 172.20.0.3
+      extra_hosts:
+         - "filebeat:172.20.0.2"
+         - "redis:172.20.0.3"
+         - "logstash:172.20.0.4"
+         - "elasticsearch:172.20.0.5"
+         - "kibana:172.20.0.6"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/redis/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/redis/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/redis/logs:/redis/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "6379:6379"
+
+   logstash:
+      image: birdben/logstash_2.x:v2
+      restart: always
+      container_name: logstash2x
+      command: logstash -f /opt/logstash/config/logstash_redis2es.conf
+      networks:
+         elk_net:
+            ipv4_address: 172.20.0.4
+      extra_hosts:
+         - "filebeat:172.20.0.2"
+         - "redis:172.20.0.3"
+         - "logstash:172.20.0.4"
+         - "elasticsearch:172.20.0.5"
+         - "kibana:172.20.0.6"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/logstash/config:/opt/logstash/config
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/logstash/logfile:/opt/logstash/logfile
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/logstash/logs:/opt/logstash/logs
+
+   elasticsearch:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/elasticsearch_2.x:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: elasticsearch2x
+      networks:
+         elk_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.20.0.5
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "filebeat:172.20.0.2"
+         - "redis:172.20.0.3"
+         - "logstash:172.20.0.4"
+         - "elasticsearch:172.20.0.5"
+         - "kibana:172.20.0.6"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/elasticsearch/data:/usr/share/elasticsearch/data
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/elasticsearch/config:/usr/share/elasticsearch/config
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/elasticsearch/logs:/usr/share/elasticsearch/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "9200:9200"
+         - "9300:9300"
+
+   kibana:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/kibana_4.x:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: kibana4x
+      networks:
+         elk_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.20.0.6
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "filebeat:172.20.0.2"
+         - "redis:172.20.0.3"
+         - "logstash:172.20.0.4"
+         - "elasticsearch:172.20.0.5"
+         - "kibana:172.20.0.6"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/kibana/config:/opt/kibana/config
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/kibana/logs:/opt/kibana/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "5601:5601"
+
+networks:
+  elk_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.20.0.0/16
+        gateway: 172.20.0.1

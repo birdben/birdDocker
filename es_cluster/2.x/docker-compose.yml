@@ -1,0 +1,89 @@
+version: '2'
+services:
+
+   es1:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/elasticsearch_2.x:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: elasticsearch2x1
+      networks:
+         es_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.20.0.2
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "es1:172.20.0.2"
+         - "es2:172.20.0.3"
+         - "es3:172.20.0.4"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es1/data:/usr/share/elasticsearch/data
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es1/config:/usr/share/elasticsearch/config
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es1/logs:/usr/share/elasticsearch/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "9200:9200"
+         - "9300:9300"
+      mem_limit: 1g
+
+   es2:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/elasticsearch_2.x:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: elasticsearch2x2
+      networks:
+         es_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.20.0.3
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "es1:172.20.0.2"
+         - "es2:172.20.0.3"
+         - "es3:172.20.0.4"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es2/data:/usr/share/elasticsearch/data
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es2/config:/usr/share/elasticsearch/config
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es2/logs:/usr/share/elasticsearch/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "9201:9200"
+         - "9301:9300"
+      mem_limit: 1g
+
+   es3:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/elasticsearch_2.x:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: elasticsearch2x3
+      networks:
+         es_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.20.0.4
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "es1:172.20.0.2"
+         - "es2:172.20.0.3"
+         - "es3:172.20.0.4"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es3/data:/usr/share/elasticsearch/data
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es3/config:/usr/share/elasticsearch/config
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es3/logs:/usr/share/elasticsearch/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "9202:9200"
+         - "9302:9300"
+      mem_limit: 1g
+
+networks:
+  es_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.20.0.0/16
+        gateway: 172.20.0.1

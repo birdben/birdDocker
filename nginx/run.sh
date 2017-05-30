@@ -1,1 +1,1 @@
-docker run -p 9999:22 -p 8888:80 -t -i birdben/nginx:v1
+docker run -itd -p 8888:80 -p 8443:443 birdben/nginx:v2 nginx -c /software/nginx-1.8.0/nginx.conf
