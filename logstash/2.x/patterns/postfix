@@ -1,0 +1,7 @@
+GO_INFO [IWEF]
+GO_SPACE (\s+)
+GO_TIMESTAMP %{MONTHNUM}%{MONTHDAY} %{TIME}.%{GO_SSS}
+GO_SSS (\d{3})
+GO_LOGMSG (.*)
+
+GO_AEGIS_LOGS %{GO_INFO:info}%{GO_TIMESTAMP:timestamp}%{DATA:sss}%{GO_SPACE:space}%{DATA:threadid} %{DATA:file}:%{DATA:line}] %{GO_LOGMSG:aegis_msg}

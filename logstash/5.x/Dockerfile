@@ -32,10 +32,12 @@ RUN set -x \
 	&& mkdir -p /usr/share/logstash/logfile \
 	&& mkdir -p /usr/share/logstash/config \
 	&& mkdir -p /usr/share/logstash/data \
+	&& mkdir -p /usr/share/logstash/patterns \
 	&& chown -R logstash:logstash /usr/share/logstash/logs \
 	&& chown -R logstash:logstash /usr/share/logstash/logfile \
 	&& chown -R logstash:logstash /usr/share/logstash/config \
-	&& chown -R logstash:logstash /usr/share/logstash/data
+	&& chown -R logstash:logstash /usr/share/logstash/data \
+	&& chown -R logstash:logstash /usr/share/logstash/patterns
 
 ENV LS_HOME /usr/share/logstash
 ENV PATH /usr/share/logstash/bin:$PATH
@@ -48,6 +50,7 @@ VOLUME /usr/share/logstash/logs
 VOLUME /usr/share/logstash/logfile
 VOLUME /usr/share/logstash/config
 VOLUME /usr/share/logstash/data
+VOLUME /usr/share/logstash/patterns
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["logstash", "-e", ""]
+CMD ["logstash", "-f", "/usr/share/logstash/config/logstash.conf"]

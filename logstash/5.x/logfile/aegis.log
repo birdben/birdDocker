@@ -1,0 +1,21 @@
+Log file created at: 2017/05/05 12:31:05
+Running on machine: localhost
+Binary: Built with gc go1.8 for darwin/amd64
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0505 12:31:05.962883   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"","msg":"[Start server....]"}
+I0505 12:31:08.305114   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[这是一条消息]"}
+I0505 12:31:08.319241   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[withdraw map[user_id:987654321 amount:50000 dealer_id:123456 requestId:138837343590154240] {0 20010 0}]"}
+I0505 12:31:12.322314   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[这是一条消息]"}
+I0505 12:31:12.327241   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[withdraw map[user_id:987654321 amount:50000 dealer_id:123456 requestId:138837343590154240] {0 20010 0}]"}
+I0505 12:31:13.242314   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[这是一条消息]"}
+I0505 12:31:13.329241   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[withdraw map[user_id:987654321 amount:50000 dealer_id:123456 requestId:138837343590154240] {0 20010 0}]"}
+I0505 12:31:13.804667   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[这是一条消息]"}
+I0505 12:31:14.319241   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[withdraw map[user_id:987654321 amount:50000 dealer_id:123456 requestId:138837343590154240] {0 20010 0}]"}
+I0505 12:31:14.672311   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[这是一条消息]"}
+I0505 12:31:15.109249   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[withdraw map[user_id:987654321 amount:50000 dealer_id:123456 requestId:138837343590154240] {0 20010 0}]"}
+I0505 12:31:15.325146   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[这是一条消息]"}
+I0505 12:31:15.879243   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[withdraw map[user_id:987654321 amount:50000 dealer_id:123456 requestId:138837343590154240] {0 20010 0}]"}
+I0505 12:31:16.209112   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[这是一条消息]"}
+I0505 12:31:16.783217   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[withdraw map[user_id:987654321 amount:50000 dealer_id:123456 requestId:138837343590154240] {0 20010 0}]"}
+I0505 12:31:17.342513   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[这是一条消息]"}
+I0505 12:31:17.693246   55851 logger.go:113] {"logType":"AegisCommonInfo","requestId":"138837343590154240","msg":"[withdraw map[user_id:987654321 amount:50000 dealer_id:123456 requestId:138837343590154240] {0 20010 0}]"}

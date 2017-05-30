@@ -31,9 +31,11 @@ RUN set -x \
 	&& mkdir -p /opt/logstash/logs \
 	&& mkdir -p /opt/logstash/logfile \
 	&& mkdir -p /opt/logstash/config \
+	&& mkdir -p /opt/logstash/patterns \
 	&& chown -R logstash:logstash /opt/logstash/logs \
 	&& chown -R logstash:logstash /opt/logstash/logfile \
-	&& chown -R logstash:logstash /opt/logstash/config
+	&& chown -R logstash:logstash /opt/logstash/config \
+	&& chown -R logstash:logstash /opt/logstash/patterns
 
 ENV LS_HOME /opt/logstash
 ENV PATH /opt/logstash/bin:$PATH
@@ -45,6 +47,7 @@ COPY docker-entrypoint.sh /usr/local/bin/
 VOLUME /opt/logstash/logs
 VOLUME /opt/logstash/logfile
 VOLUME /opt/logstash/config
+VOLUME /opt/logstash/patterns
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["logstash", "-e", ""]
+CMD ["logstash", "-f", "/opt/logstash/config/logstash.conf"]
