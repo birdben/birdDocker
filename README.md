@@ -1,30 +1,21 @@
-## Docker Develop Environment
+## Docker开发环境
 
-#### 可以直接从DockerHub上pull已经构件好的Docker image，后续也会陆续更新的。
+#### 分支情况
 
-- docker pull birdben/tools
-- docker pull birdben/jdk7
-- docker pull birdben/jdk8
-- docker pull birdben/tomcat7
-- docker pull birdben/redis
-- docker pull birdben/mongodb
-- docker pull birdben/mysql
-- docker pull birdben/nginx
-- docker pull birdben/elasticsearch
-- docker pull birdben/escluster
-- docker pull birdben/logstash
-- docker pull birdben/kibana
-- docker pull birdben/elk_log_agent
-- docker pull birdben/elk
-- docker pull birdben/hadoop
-- docker pull birdben/hive
-- docker pull birdben/hbase
-- docker pull birdben/zookeeper
+- master：最新的镜像的稳定版
+- v2：最新的镜像的开发分支
+- v1：老版本的镜像（已不推荐使用）
 
-#### 具体构建Docker镜像的步骤请参考我的博客
-- http://blog.csdn.net/birdben/article/category/5957617
+###### 注意：
+
+本项目主要是方便使用docker容器快速创建实验环境，所有的配置文件都支持外部挂载方式，并且最新的镜像遵循docker官方推荐用法"one process per container"的方式，去掉了supervisor管理进程，并且提供了更多开发环境的docker镜像。还对部分常用集群环境使用docker-compose进行了编排。如果项目有不正确或者不足之处欢迎提PR，谢谢！
+
+#### DockerHub地址
+
+- <https://hub.docker.com/u/birdben/>
 
 #### Contact Me
+
 - QQ : 1255120436
 - BTW : 加好友请添加备注从github上看到，谢谢！
 - 微信公众号 : birdben_24programmer
