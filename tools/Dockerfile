@@ -27,3 +27,6 @@ RUN set -x \
 	&& chmod +x /usr/local/bin/gosu \
 	&& gosu nobody true
 
+RUN echo "Asia/Shanghai" > /etc/timezone \
+    && ln -sf /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+
