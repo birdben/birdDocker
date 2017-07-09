@@ -32,9 +32,11 @@ RUN set -x \
 	&& mkdir -p /usr/share/elasticsearch/data \
 	&& mkdir -p /usr/share/elasticsearch/logs \
 	&& mkdir -p /usr/share/elasticsearch/config \
+	&& mkdir -p /usr/share/elasticsearch/repo \
 	&& chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/data \
 	&& chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/logs \
-	&& chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config
+	&& chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config \
+	&& chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/repo
 
 ENV ES_HOME /usr/share/elasticsearch
 ENV PATH /usr/share/elasticsearch/bin:$PATH
@@ -46,6 +48,7 @@ COPY docker-entrypoint.sh /usr/local/bin/
 VOLUME /usr/share/elasticsearch/data
 VOLUME /usr/share/elasticsearch/logs
 VOLUME /usr/share/elasticsearch/config
+VOLUME /usr/share/elasticsearch/repo
 
 # 容器需要开放ES的9200和9300端口
 EXPOSE 9200 9300
