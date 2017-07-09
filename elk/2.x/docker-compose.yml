@@ -84,6 +84,7 @@ services:
          - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/elasticsearch/data:/usr/share/elasticsearch/data
          - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/elasticsearch/config:/usr/share/elasticsearch/config
          - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/elasticsearch/logs:/usr/share/elasticsearch/logs
+         - /Users/yunyu/workspace_git/birdDocker/elk/2.x/volumes/elasticsearch/repo:/usr/share/elasticsearch/repo
       # 指定当前构建的Docker容器对外开放的端口号映射
       ports:
          - "9200:9200"

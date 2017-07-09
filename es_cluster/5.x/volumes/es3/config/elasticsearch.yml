@@ -36,6 +36,7 @@ node.name: node-3
 #
 #path.logs: /path/to/logs
 #
+path.repo: /usr/share/elasticsearch/repo
 # ----------------------------------- Memory -----------------------------------
 #
 # Lock the memory on startup:
