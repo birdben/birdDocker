@@ -21,6 +21,7 @@ services:
          - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es1/data:/usr/share/elasticsearch/data
          - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es1/config:/usr/share/elasticsearch/config
          - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es1/logs:/usr/share/elasticsearch/logs
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es1/repo:/usr/share/elasticsearch/repo
       # 指定当前构建的Docker容器对外开放的端口号映射
       ports:
          - "9200:9200"
@@ -47,6 +48,7 @@ services:
          - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es2/data:/usr/share/elasticsearch/data
          - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es2/config:/usr/share/elasticsearch/config
          - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es2/logs:/usr/share/elasticsearch/logs
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es2/repo:/usr/share/elasticsearch/repo
       # 指定当前构建的Docker容器对外开放的端口号映射
       ports:
          - "9201:9200"
@@ -73,6 +75,7 @@ services:
          - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es3/data:/usr/share/elasticsearch/data
          - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es3/config:/usr/share/elasticsearch/config
          - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es3/logs:/usr/share/elasticsearch/logs
+         - /Users/yunyu/workspace_git/birdDocker/es_cluster/2.x/volumes/es3/repo:/usr/share/elasticsearch/repo
       # 指定当前构建的Docker容器对外开放的端口号映射
       ports:
          - "9202:9200"
