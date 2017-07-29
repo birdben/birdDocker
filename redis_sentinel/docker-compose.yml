@@ -1,0 +1,148 @@
+version: '2'
+services:
+   redis1:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/redis:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: redis1
+      networks:
+         redis_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.22.0.2
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "redis1:172.22.0.2"
+         - "redis2:172.22.0.3"
+         - "redis3:172.22.0.4"
+         - "sentinel1:172.22.0.5"
+         - "sentinel2:172.22.0.6"
+         - "sentinel3:172.22.0.7"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/redis1/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/redis1/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/redis1/logs:/redis/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "6379:6379"
+
+   redis2:
+      image: birdben/redis:v2
+      restart: always
+      container_name: redis2
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.3
+      extra_hosts:
+         - "redis1:172.22.0.2"
+         - "redis2:172.22.0.3"
+         - "redis3:172.22.0.4"
+         - "sentinel1:172.22.0.5"
+         - "sentinel2:172.22.0.6"
+         - "sentinel3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/redis2/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/redis2/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/redis2/logs:/redis/logs
+      ports:
+         - "6479:6379"
+
+   redis3:
+      image: birdben/redis:v2
+      restart: always
+      container_name: redis3
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.4
+      extra_hosts:
+         - "redis1:172.22.0.2"
+         - "redis2:172.22.0.3"
+         - "redis3:172.22.0.4"
+         - "sentinel1:172.22.0.5"
+         - "sentinel2:172.22.0.6"
+         - "sentinel3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/redis3/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/redis3/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/redis3/logs:/redis/logs
+      ports:
+         - "6579:6379"
+
+   sentinel1:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/sentinel:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: sentinel1
+      networks:
+         redis_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.22.0.5
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "redis1:172.22.0.2"
+         - "redis2:172.22.0.3"
+         - "redis3:172.22.0.4"
+         - "sentinel1:172.22.0.5"
+         - "sentinel2:172.22.0.6"
+         - "sentinel3:172.22.0.7"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/sentinel1/config:/sentinel/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/sentinel1/data:/sentinel/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/sentinel1/logs:/sentinel/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "26379:26379"
+
+   sentinel2:
+      image: birdben/sentinel:v2
+      restart: always
+      container_name: sentinel2
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.6
+      extra_hosts:
+         - "redis1:172.22.0.2"
+         - "redis2:172.22.0.3"
+         - "redis3:172.22.0.4"
+         - "sentinel1:172.22.0.5"
+         - "sentinel2:172.22.0.6"
+         - "sentinel3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/sentinel2/config:/sentinel/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/sentinel2/data:/sentinel/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/sentinel2/logs:/sentinel/logs
+      ports:
+         - "26479:26379"
+
+   sentinel3:
+      image: birdben/sentinel:v2
+      restart: always
+      container_name: sentinel3
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.7
+      extra_hosts:
+         - "redis1:172.22.0.2"
+         - "redis2:172.22.0.3"
+         - "redis3:172.22.0.4"
+         - "sentinel1:172.22.0.5"
+         - "sentinel2:172.22.0.6"
+         - "sentinel3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/sentinel3/config:/sentinel/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/sentinel3/data:/sentinel/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_sentinel/volumes/sentinel3/logs:/sentinel/logs
+      ports:
+         - "26579:26379"
+
+networks:
+  redis_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.22.0.0/16
+        gateway: 172.22.0.1
