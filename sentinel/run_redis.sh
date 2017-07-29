@@ -1,0 +1,1 @@
+docker run -itd --user redis -p 26379:26379 -v /Users/yunyu/workspace_git/birdDocker/sentinel/data:/sentinel/data -v /Users/yunyu/workspace_git/birdDocker/sentinel/config:/sentinel/config -v /Users/yunyu/workspace_git/birdDocker/sentinel/logs:/sentinel/logs --link redis_redis:redis --name sentinel_sentinel birdben/sentinel:v2
