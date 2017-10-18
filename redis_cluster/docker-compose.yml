@@ -1,0 +1,154 @@
+version: '2'
+services:
+   redism1:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/redis:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: redism1
+      networks:
+         redis_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.22.0.2
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "redism1:172.22.0.2"
+         - "redism2:172.22.0.3"
+         - "redism3:172.22.0.4"
+         - "rediss1:172.22.0.5"
+         - "rediss2:172.22.0.6"
+         - "rediss3:172.22.0.7"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/redism1/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/redism1/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/redism1/logs:/redis/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "6379:6379"
+         - "16379:16379"
+
+   redism2:
+      image: birdben/redis:v2
+      restart: always
+      container_name: redism2
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.3
+      extra_hosts:
+         - "redism1:172.22.0.2"
+         - "redism2:172.22.0.3"
+         - "redism3:172.22.0.4"
+         - "rediss1:172.22.0.5"
+         - "rediss2:172.22.0.6"
+         - "rediss3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/redism2/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/redism2/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/redism2/logs:/redis/logs
+      ports:
+         - "6479:6379"
+         - "16479:16379"
+
+   redism3:
+      image: birdben/redis:v2
+      restart: always
+      container_name: redism3
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.4
+      extra_hosts:
+         - "redism1:172.22.0.2"
+         - "redism2:172.22.0.3"
+         - "redism3:172.22.0.4"
+         - "rediss1:172.22.0.5"
+         - "rediss2:172.22.0.6"
+         - "rediss3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/redism3/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/redism3/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/redism3/logs:/redis/logs
+      ports:
+         - "6579:6379"
+         - "16579:16379"
+
+   rediss1:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/redis:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: rediss1
+      networks:
+         redis_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.22.0.5
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "redism1:172.22.0.2"
+         - "redism2:172.22.0.3"
+         - "redism3:172.22.0.4"
+         - "rediss1:172.22.0.5"
+         - "rediss2:172.22.0.6"
+         - "rediss3:172.22.0.7"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/rediss1/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/rediss1/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/rediss1/logs:/redis/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "6679:6379"
+         - "16679:16379"
+
+   rediss2:
+      image: birdben/redis:v2
+      restart: always
+      container_name: rediss2
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.6
+      extra_hosts:
+         - "redism1:172.22.0.2"
+         - "redism2:172.22.0.3"
+         - "redism3:172.22.0.4"
+         - "rediss1:172.22.0.5"
+         - "rediss2:172.22.0.6"
+         - "rediss3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/rediss2/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/rediss2/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/rediss2/logs:/redis/logs
+      ports:
+         - "6779:6379"
+         - "16779:16379"
+
+   rediss3:
+      image: birdben/redis:v2
+      restart: always
+      container_name: rediss3
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.7
+      extra_hosts:
+         - "redism1:172.22.0.2"
+         - "redism2:172.22.0.3"
+         - "redism3:172.22.0.4"
+         - "rediss1:172.22.0.5"
+         - "rediss2:172.22.0.6"
+         - "rediss3:172.22.0.7"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/rediss3/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/rediss3/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_cluster/volumes/rediss3/logs:/redis/logs
+      ports:
+         - "6879:6379"
+         - "16879:16379"
+
+networks:
+  redis_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.22.0.0/16
+        gateway: 172.22.0.1

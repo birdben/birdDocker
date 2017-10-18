@@ -1,0 +1,70 @@
+version: '2'
+services:
+   redis1:
+      # 指定当前构建的Docker容器的镜像
+      image: birdben/redis:v2
+      restart: always
+      # 指定当前构建的Docker容器的名称
+      container_name: redis1
+      networks:
+         redis_net:
+            # 指定当前构建的Docker容器的IP地址
+            ipv4_address: 172.22.0.2
+      # 指定当前构建的Docker容器的host配置
+      extra_hosts:
+         - "redis1:172.22.0.2"
+         - "redis2:172.22.0.3"
+         - "redis3:172.22.0.4"
+      # 指定当前构建的Docker容器的volume挂在目录设置
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_replication/volumes/redis1/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_replication/volumes/redis1/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_replication/volumes/redis1/logs:/redis/logs
+      # 指定当前构建的Docker容器对外开放的端口号映射
+      ports:
+         - "6379:6379"
+
+   redis2:
+      image: birdben/redis:v2
+      restart: always
+      container_name: redis2
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.3
+      extra_hosts:
+         - "redis1:172.22.0.2"
+         - "redis2:172.22.0.3"
+         - "redis3:172.22.0.4"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_replication/volumes/redis2/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_replication/volumes/redis2/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_replication/volumes/redis2/logs:/redis/logs
+      ports:
+         - "6479:6379"
+
+   redis3:
+      image: birdben/redis:v2
+      restart: always
+      container_name: redis3
+      networks:
+         redis_net:
+            ipv4_address: 172.22.0.4
+      extra_hosts:
+         - "redis1:172.22.0.2"
+         - "redis2:172.22.0.3"
+         - "redis3:172.22.0.4"
+      volumes:
+         - /Users/yunyu/workspace_git/birdDocker/redis_replication/volumes/redis3/config:/redis/config
+         - /Users/yunyu/workspace_git/birdDocker/redis_replication/volumes/redis3/data:/redis/data
+         - /Users/yunyu/workspace_git/birdDocker/redis_replication/volumes/redis3/logs:/redis/logs
+      ports:
+         - "6579:6379"
+
+networks:
+  redis_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.22.0.0/16
+        gateway: 172.22.0.1
