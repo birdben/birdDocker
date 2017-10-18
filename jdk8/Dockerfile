@@ -21,5 +21,6 @@ RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y -t jessie-backports \
 		openjdk-8-jre-headless \
+		openjdk-8-jdk-headless \
         ca-certificates-java \
 	&& rm -rf /var/lib/apt/lists/*

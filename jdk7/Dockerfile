@@ -14,6 +14,6 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/jre
 RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y \
-		openjdk-7-jre-headless \
+		openjdk-7-jdk \
 		ca-certificates-java \
 	&& rm -rf /var/lib/apt/lists/*
