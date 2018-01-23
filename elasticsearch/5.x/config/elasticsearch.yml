@@ -88,3 +88,5 @@ http.port: 9200
 # Require explicit names when deleting indices:
 #
 #action.destructive_requires_name: true
+http.cors.enabled: true
+http.cors.allow-origin: "*"
